@@ -28,6 +28,13 @@ def funcprint(greeting, name='Henrik'):
 func('Hello', name='Gustav')
 funcprint('Hello', name='Ellinor')
 ```
+output:
+```
+Hello Gustav
+2017-12-25 23:50:53,699 - __main__ - DEBUG - function:func args:('Hello',) kwargs:{'name':'Gustav'} - time: 2.8371810913085938e-05
+Hello Ellinor
+2017-12-25T23:50:53.699207 - __main__  -  funcprint(('Hello',),{'name': 'Ellinor'})  -  time:7.62939453125e-06
+```
 
 ## SETUP
 pip install [githublink]
