@@ -36,9 +36,10 @@ Hello Ellinor
 2017-12-25T23:50:53.699207 - __main__  -  funcprint(('Hello',),{'name': 'Ellinor'})  -  time:7.62939453125e-06
 ```
 
-## SETUP
-pip install [githublink]
+## INSTALL
+pip install git+https://github.com/hvgab/timmytime
 
-from timmytime import timmy
+### Import
+from timmytime import timmy, timmyprint
 
-and then add @timmy above any defined function or procedure
+and then add @timmy above any defined function or procedure to output to log.
