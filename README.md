@@ -1,13 +1,12 @@
-# Timmy
+# Timmytimer
 Named after the childrens TV-show Timmy Time
-In Norwegian they call it "Timmy time!"
 
 A simple wrapper to log/print functionname, \*args and \**kwargs.
 
 ## Example Usage
 
 ```
-from timmytime import timmy, timmyprint
+from timmytimer import timmy, timmyprint
 
 # set up logger
 log.setLevel(logging.DEBUG)
@@ -37,9 +36,9 @@ Hello Ellinor
 ```
 
 ## INSTALL
-pip install git+https://github.com/hvgab/timmytime
+pip install timmytimer
 
 ### Import
-from timmytime import timmy, timmyprint
+from timmytimer import timmy, timmyprint
 
 and then add @timmy above any defined function or procedure to output to log.
