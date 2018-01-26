@@ -2,18 +2,27 @@ import time
 import datetime as dt
 import logging
 
-log = logging.getLogger(__name__)
-log.addHandler(logging.NullHandler())
+try:
+    from colorama import Fore, Back, Style, init
+    init(autoreset=True)
+except ImportError:  # fallback so that the imported classes always exist
+    class ColorFallback():
+        __getattr__ = lambda self, name: ''
+    Fore = Back = Style = ColorFallback()
 
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 def timmy(function, *args, **kwargs):
     def wrapper(*args, **kwargs):
         t1 = time.time()
         result = function(*args, **kwargs)
         t2 = time.time()
+        ms = (t2-t1)*1000.0
 
-        log.debug('function:{0} args:{2} kwargs:{3} - time: {1}'.format(
-                  function.__name__, t2 - t1, args, kwargs))
+        pre_string = '[{}]'.format(__name__)
+        func_string = '{0}({1}{2})'.format(function.__name__, args, kwargs)
+        time_string = '{:.2f}ms'.format(ms)
+        logging.debug('{}{}{}'.format(pre_string, func_string, time_string))
         return result
     return wrapper
 
@@ -23,30 +32,14 @@ def timmyprint(function, *args, **kwargs):
         t1 = time.time()
         result = function(*args, **kwargs)
         t2 = time.time()
+        ms = (t2-t1)*1000.0
 
-        pre_string = '{} - {}'.format(dt.datetime.now().isoformat(), __name__)
-        func_string = '{0}({1},{2})'.format(function.__name__, args, kwargs)
-        time_string = 'time: {}'.format(t2 - t1)
-        print(pre_string, ' - ', func_string, ' - ', time_string)
+        pre_string = '[{}]'.format(__name__)
+        func_string = '{0}({1}{2})'.format(function.__name__, args, kwargs)
+        time_string = '{:.2f}ms'.format(ms)
+        print(Fore.CYAN+pre_string,func_string,Fore.GREEN+time_string)
         return result
     return wrapper
 
-
-if __name__ == '__main__':
-    log.setLevel(logging.DEBUG)
-    ch = logging.StreamHandler()
-    formatter = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    ch.setFormatter(formatter)
-    log.addHandler(ch)
-
-    @timmy
-    def func(greeting, name='Henrik'):
-        print('{} {}'.format(greeting, name))
-
-    @timmyprint
-    def funcprint(greeting, name='Henrik'):
-        print('{} {}'.format(greeting, name))
-
-    func('Hello', name='Gustav')
-    funcprint('Hello', name='Ellinor')
+# shorter alias for print
+timmyp = timmyprint
