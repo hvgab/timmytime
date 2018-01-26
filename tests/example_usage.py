@@ -3,14 +3,6 @@ import logging
 from time import sleep
 from random import random
 
-try:
-    from colorama import Fore, Back, Style, init
-    init(autoreset=True)
-except ImportError:  # fallback so that the imported classes always exist
-    class ColorFallback():
-        __getattr__ = lambda self, name: ''
-    Fore = Back = Style = ColorFallback()
-
 @timmy
 def test_timmy(greeting, name='Henrik'):
     sleep(random())
