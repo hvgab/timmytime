@@ -6,7 +6,7 @@ def read(fname):
 setup(
     name="timmytimer",
     description='minimal timer wrapper with print or log',
-    long_description = read('README.md')
+    long_description = read('README.md'),
     version="0.2",
     url='https://github.com/hvgab/timmytimer',
     author='Henrik V. Gabrielsen',
